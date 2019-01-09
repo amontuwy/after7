@@ -9,6 +9,12 @@
   "installed_plugins": {
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.team.jade"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "com.team.jade"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.team.jade"
     }
   },
   "dependent_plugins": {}
