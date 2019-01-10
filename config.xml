@@ -25,5 +25,7 @@
     </platform>
     <plugin name="cordova-sqlite-storage" spec="^2.6.0" />
     <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
+    <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
+    <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <engine name="android" spec="^7.1.4" />
 </widget>
