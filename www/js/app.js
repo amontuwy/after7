@@ -12,6 +12,7 @@ function initDatabase() {
     transaction.executeSql('CREATE TABLE soiree (date, password)');
   });
   $("#map").hide();
+  $("#search").hide();
   $("#creersoiree").hide();
   $("#connected").hide();
 }
@@ -34,6 +35,7 @@ function addRecordUser() {
     $("#login").hide();
     reload();
     $("#map").show();
+    $("#search").show();
     $("#connected").show();
   });
 }
@@ -54,6 +56,7 @@ function addRecordSoiree() {
 function gotoCreateSoiree() {
   reload();
   $("#map").hide();
+  $("#search").hide();
   $("#creersoiree").show();
 }
 

@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-[{"name":"android.local.jars:sqlite-connector.jar:3bf12b8a3750fe2e2afc5ac914ba0cec11499412","index":0,"scopes":["EXTERNAL_LIBRARIES"],"types":["CLASSES"],"format":"JAR","present":true},{"name":"android.local.jars:sqlite-native-driver.jar:7dba5102fa8ff0d1e7470896ae6ee09b1a706862","index":1,"scopes":["EXTERNAL_LIBRARIES"],"types":["CLASSES"],"format":"JAR","present":true}]
-=======
-[{"name":"android.local.jars:sqlite-connector.jar:0fab951d0f3d0769f6a9047bd1727d94c9b49a58","index":2,"scopes":["EXTERNAL_LIBRARIES"],"types":["CLASSES"],"format":"JAR","present":true},{"name":"android.local.jars:sqlite-native-driver.jar:99976b5c4e49002522c6da03a479bb9f4ee117d9","index":3,"scopes":["EXTERNAL_LIBRARIES"],"types":["CLASSES"],"format":"JAR","present":true}]
->>>>>>> Single page avec carte
+[{"name":"android.local.jars:sqlite-connector.jar:0fab951d0f3d0769f6a9047bd1727d94c9b49a58","index":0,"scopes":["EXTERNAL_LIBRARIES"],"types":["CLASSES"],"format":"JAR","present":true},{"name":"android.local.jars:sqlite-native-driver.jar:99976b5c4e49002522c6da03a479bb9f4ee117d9","index":1,"scopes":["EXTERNAL_LIBRARIES"],"types":["CLASSES"],"format":"JAR","present":true}]
