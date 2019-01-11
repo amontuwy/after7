@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Fri Jan 11 10:26:32 CET 2019
+#Fri Jan 11 13:45:10 CET 2019
 17.baseType=DIRECTORY
 4.path=www/img/logo.png
 25.base=/home/amontuwy/After7/platforms/android/app/build/intermediates/assets/debug

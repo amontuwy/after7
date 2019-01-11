@@ -10,6 +10,8 @@ function initDatabase() {
   database.transaction(function(transaction) {
     transaction.executeSql('CREATE TABLE soiree (date, password)');
   });
+  hide("map");
+  hide("creersoiree");
   }
 
 function showMessage(message) {
@@ -27,7 +29,10 @@ function addRecordUser() {
   }, function(error) {
     showMessage('INSERT error: ' + error.message);
   }, function() {
-    goToMap();
+    hide(login);
+    show(map);
+    show(connected);
+    hide(disconnected);
   });
 }
 
@@ -44,13 +49,14 @@ function addRecordSoiree() {
   });
 }
 
-function goToMap() {
-   window.location = "map.html";
-}
+// function goToMap() {
+//    window.location = "map.html";
+// }
 
 function gotoCreateSoiree() {
-  window.location = "creerSoiree.html";
-}
+  hide(map);
+  show(creersoiree);
+ }
 
 function verify(){
   var username = $('nom').val();
@@ -70,11 +76,25 @@ function verify(){
   });
 }
 
+function hide(x) {
+  x.style.display = "none";
+}
+
+function show(x){
+  x.style.display = "block";
+}
+
 document.addEventListener('deviceready', function() {
+  var login = document.getElementById("login");
+  var map = document.getElementById("map");
+  var connected = document.getElementById("connected");
+  var creersoiree = document.getElementById("creersoiree");
   $('#creercompte').click(addRecordUser);
   $('#seconnecter').click(verify);
-  $('addsoiree').click(gotoCreateSoiree);
-
+  $('#addsoiree').click(gotoCreateSoiree);
+  // hide(map);
+  // hide(connected);
+  // hide(creersoiree);
   initDatabase();
 });
 
