@@ -107,12 +107,12 @@
                               <input class = "file-path validate" type = "text"  placeholder = "Importez votre banière" />
                             </div>
               
-                          </div>
+                        </div>
               
                           <div class="input-field">
                             <i class="material-icons md-16 prefix">title_outline</i>
                             <input name="titre" type="text">
-                            <label for="nom">Titre de la soirée</label>
+                            <label for="titre">Titre de la soirée</label>
                           </div>
               
                           <div class="input-field">
@@ -156,7 +156,27 @@
                               </div>
                             </div>
                           </div>
-                          <a class="waves-effect btn" id="creerSoiree">Creer une soiree</a>
+
+                          <div class="row col s12 valign-wrapper">
+              
+                                <!--<div id="slider-price" class="input-field col s8" min="0" max="1000"></div> -->
+                                <p class="range-field col s6">
+                                  <label>Type de soirée</label>
+                                </p>
+                  
+                                <div class="input-field col s6">
+                                        <div class="switch">
+                                                <label>
+                                                  Publique
+                                                  <input type="checkbox">
+                                                  <span class="lever"></span>
+                                                  Privée
+                                                </label>
+                                            </div>
+                                </div>
+                              </div>
+                          
+                          <a class="waves-effect btn" id="creerSoireeinDB">Creer une soiree</a>
                         </form>
                 </div>
         <script async defer

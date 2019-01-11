@@ -182,6 +182,7 @@ document.addEventListener('deviceready', function () {
   $('#creercompte').click(addRecordUser);
   $('#seconnecter').click(verify);
   $('#addsoiree').click(gotoCreateSoiree);
+  $('#creerSoireeinDB').click(addRecordSoiree);
   initDatabase();
 });
 
