@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+      <meta charset="utf-8"/>
+<!--      <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com https://fonts.googleapis.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; img-src *; media-src *; connect-src *">
+-->      <meta name="format-detection" content="telephone=no">
+      <meta name="msapplication-tap-highlight" content="no">
+      <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+      <link rel="stylesheet" type="text/css" href="css/index.css">
+      <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
+      <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+      <title>After 7</title>
+    </head>
+
+    <body>
+      <nav>
+        <div class="nav-wrapper teal">
+          <img src="img/logo.png" alt="Logo" class="brand-logo" width="220" height="50">
+        </div>
+      </nav>
+
+      <div class="card-panel center-align">
+        <form>
+          <div class = "file-field input-field">
+            <div class = "btn">
+              <span>Import</span>
+              <input type = "file" />
+              </div>
+
+              <div class = "file-path-wrapper">
+                <input class = "file-path validate" type = "text"  placeholder = "Importez votre banière" />
+              </div>
+
+            </div>
+
+            <div class="input-field">
+              <!-- <i class="material-icons md-16 prefix">title_outline</i> -->
+              <input name="titre" type="text">
+              <label for="nom">Titre de la soirée</label>
+            </div>
+
+            <div class="input-field">
+              <!-- <i class="material-icons md-16 prefix">event_outline</i> -->
+              <input name="date" type="date" class="datepicker" onclick="calendar()">
+              <label for="nom">Date</label>
+            </div>
+
+            <div class="input-field">
+              <!-- <i class="material-icons md-16 prefix">place_outline</i> -->
+              <input id="lieu" type="text">
+              <label for="nom">Lieu</label>
+            </div>
+
+            <div class="input-field">
+              <input id="descr" type="text">
+              <label for="nom">Description</label>
+            </div>
+
+            <div class="input-field">
+              <input id="theme" type="text">
+              <label for="mdp">Thème</label>
+            </div>
+
+            <a class="waves-effect btn" id="creerSoiree">Creer une soiree</a>
+          </form>
+        </div>
+
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+	      <script type="text/javascript" src="js/jquery.min.js"></script>
+ 	      <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/form.soiree.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+
+    </body>
+</html>
