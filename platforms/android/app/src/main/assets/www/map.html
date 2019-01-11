@@ -1,20 +1,4 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-    http://www.apache.org/licenses/LICENSE-2.0
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
     <head>
         <link rel="stylesheet" href="css/materialize.min.css">
@@ -37,8 +21,74 @@
                     </div>
                 </nav>
         
+                <!-- login module -->
+        <div id="login" class="card-panel center-align">
+                <form>
+                    <div class="input-field">
+                        <input id="nom" type="text">
+                        <label for="nom">Nom d'utilisateur</label>
+                    </div>
+        
+                    <div class="input-field">
+                        <input id="mdp" type="text">
+                        <label for="mdp">Mot de passe</label>
+                    </div>
+        
+                    <a class="waves-effect btn" id="creercompte">Creer un compte</a>
+                </form>
+                <br/>
+                <a class="waves-effect btn" id="seconnecter">Se connecter</a>
+                </div>
+        
         <!--The div element for the map -->
         <div id="map"></div>
+
+        <!--creer soiree-->
+        <div id="creersoiree" class="card-panel center-align">
+                <form>
+                  <div class = "file-field input-field">
+                    <div class = "btn">
+                      <span>Import</span>
+                      <input type = "file" />
+                      </div>
+        
+                      <div class = "file-path-wrapper">
+                        <input class = "file-path validate" type = "text"  placeholder = "Importez votre banière" />
+                      </div>
+        
+                    </div>
+        
+                    <div class="input-field">
+                      <!-- <i class="material-icons md-16 prefix">title_outline</i> -->
+                      <input name="titre" type="text">
+                      <label for="nom">Titre de la soirée</label>
+                    </div>
+        
+                    <div class="input-field">
+                      <!-- <i class="material-icons md-16 prefix">event_outline</i> -->
+                      <input name="date" type="date" class="datepicker" onclick="calendar()">
+                      <label for="nom">Date</label>
+                    </div>
+        
+                    <div class="input-field">
+                      <!-- <i class="material-icons md-16 prefix">place_outline</i> -->
+                      <input id="lieu" type="text">
+                      <label for="nom">Lieu</label>
+                    </div>
+        
+                    <div class="input-field">
+                      <input id="descr" type="text">
+                      <label for="nom">Description</label>
+                    </div>
+        
+                    <div class="input-field">
+                      <input id="theme" type="text">
+                      <label for="mdp">Thème</label>
+                    </div>
+        
+                    <a class="waves-effect btn" id="creerSoiree">Creer une soiree</a>
+                  </form>
+                </div>
         <script>
             // Initialize and add the map
             function initMap() {

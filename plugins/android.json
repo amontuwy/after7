@@ -24,6 +24,9 @@
     },
     "cordova-sqlite-storage": {
       "PACKAGE_NAME": "com.team.jade"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.team.jade"
     }
   },
   "dependent_plugins": {}

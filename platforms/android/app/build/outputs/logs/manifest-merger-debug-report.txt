@@ -1,5 +1,6 @@
 -- Merging decision tree log ---
 manifest
+<<<<<<< HEAD
 ADDED from /home/nguyen/git/after7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
 INJECTED from /home/nguyen/git/after7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
 INJECTED from /home/nguyen/git/after7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
@@ -8,6 +9,16 @@ MERGED from [:CordovaLib] /home/nguyen/git/after7/platforms/android/CordovaLib/b
 INJECTED from /home/nguyen/git/after7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
 INJECTED from /home/nguyen/git/after7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
 INJECTED from /home/nguyen/git/after7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
+=======
+ADDED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
+INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
+INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
+INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
+MERGED from [:CordovaLib] /home/amontuwy/After7/platforms/android/CordovaLib/build/intermediates/manifests/full/debug/AndroidManifest.xml:20:1-27:12
+INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
+INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
+INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
+>>>>>>> Single page avec carte
 	package
 		ADDED from /home/nguyen/git/after7/platforms/android/app/src/main/AndroidManifest.xml:2:102-125
 		INJECTED from /home/nguyen/git/after7/platforms/android/app/src/main/AndroidManifest.xml
@@ -87,6 +98,7 @@ INJECTED from /home/nguyen/git/after7/platforms/android/app/src/main/AndroidMani
 	android:targetSdkVersion
 		ADDED from /home/nguyen/git/after7/platforms/android/app/src/main/AndroidManifest.xml:13:42-71
 	android:minSdkVersion
+<<<<<<< HEAD
 		ADDED from /home/nguyen/git/after7/platforms/android/app/src/main/AndroidManifest.xml:13:15-41
 		INJECTED from /home/nguyen/git/after7/platforms/android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/nguyen/git/after7/platforms/android/app/src/main/AndroidManifest.xml
@@ -102,3 +114,20 @@ uses-feature#android.hardware.location.gps
 ADDED from /home/nguyen/git/after7/platforms/android/app/src/main/AndroidManifest.xml:16:5-66
 	android:name
 		ADDED from /home/nguyen/git/after7/platforms/android/app/src/main/AndroidManifest.xml:16:19-63
+=======
+		ADDED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:13:15-41
+		INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:14:5-81
+	android:name
+		ADDED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:14:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:15:5-79
+	android:name
+		ADDED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:15:22-76
+uses-feature#android.hardware.location.gps
+ADDED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:16:5-66
+	android:name
+		ADDED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:16:19-63
+>>>>>>> Single page avec carte
