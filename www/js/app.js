@@ -1,6 +1,51 @@
 var database = null;
 var map;
 
+var isBrowser = false;
+var currentDateFormated = new Date().toLocaleDateString("en-GB"); // DD-MM-YYYY
+
+function initialization() {
+  // $(document).ready(function(){
+    var currentDateFormated = new Date().toISOString().split("T")[0] // MM-DD-YYYY
+    var date = $('input[name=date]');
+    date.attr({
+      "min" : currentDateFormated
+    });
+    date.val(currentDateFormated);
+
+    $('input[name=range]').on('input',function(e){
+      $('input[name=argent]').val($('input[name=range]').val())
+    });
+
+    $('input[name=argent]').on('input',function(e){
+      $('input[name=range]').val($('input[name=argent]').val())
+    });
+
+    $('select').formSelect();
+  // });
+  // document.addEventListener("deviceready", onDeviceReady, false);
+}
+
+
+function calendar(){
+  if(isBrowser){
+    var options = {
+      date: new Date(),
+      mode: 'date',
+      minDate: + currentDate
+    };
+
+    datePicker.show(options, function(date){
+     //alert("date result " + date);     // not working
+     $('input[name=date]').val(date.toLocaleDateString("en-GB"));
+    });
+  }
+}
+
+function onDeviceReady() {
+  isBrowser = ("browser" === device.platform);
+}
+
 function initDatabase() {
   database = window.sqlitePlugin.openDatabase({ name: 'after7.db', location: 'default' });
 
@@ -57,6 +102,7 @@ function gotoCreateSoiree() {
   reload();
   $("#map").hide();
   $("#search").hide();
+  initialization();
   $("#creersoiree").show();
 }
 
@@ -85,8 +131,10 @@ function initMap() {
   var Univ = {lat: 48.113981, lng: -1.638361 };
   // The map, centered at Moncuq
   var contenuInfoBulle = "Vous êtes ici";
+
   map = new google.maps.Map(
     document.getElementById('map'), { zoom: 12, center: Rennes });
+
   // The marker, positioned at Uluru
   var marker = new google.maps.Marker({ position: Univ, map: map }); var infoBulle = new google.maps.InfoWindow({
     content: contenuInfoBulle
@@ -94,7 +142,9 @@ function initMap() {
   google.maps.event.addListener(marker, 'click', function () {
     infoBulle.open(map, marker);
   });
+
   infoWindow = new google.maps.InfoWindow;
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
       var pos = {
@@ -108,10 +158,13 @@ function initMap() {
     }, function () {
       handleLocationError(true, infoWindow, map.getCenter());
     });
-  } else {
+  } 
+  else {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
+
+
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ?

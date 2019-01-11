@@ -35,6 +35,7 @@ example
 /test/build
 /test/captures
 /test/libs
+/platform
 tmp/**
 tmp/**/*
 !/spec/fixtures/org.test.plugins.dummyplugin/src/android/TestLib.jar

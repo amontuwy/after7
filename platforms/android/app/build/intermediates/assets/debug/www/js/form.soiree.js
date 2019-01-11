@@ -10,9 +10,19 @@ function initialization() {
     });
     date.val(currentDateFormated);
 
+    $('input[name=range]').on('input',function(e){
+      $('input[name=argent]').val($('input[name=range]').val())
+    });
+
+    $('input[name=argent]').on('input',function(e){
+      $('input[name=range]').val($('input[name=argent]').val())
+    });
+
+    $('select').formSelect();
   });
   document.addEventListener("deviceready", onDeviceReady, false);
 }
+
 
 function calendar(){
   if(isBrowser){
