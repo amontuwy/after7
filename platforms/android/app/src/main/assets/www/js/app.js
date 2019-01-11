@@ -1,10 +1,14 @@
 var database = null;
 
 function initDatabase() {
-  database = window.sqlitePlugin.openDatabase({name: 'users.db', location: 'default'});
+  database = window.sqlitePlugin.openDatabase({name: 'after7.db', location: 'default'});
 
   database.transaction(function(transaction) {
     transaction.executeSql('CREATE TABLE users (name, password)');
+  });
+
+  database.transaction(function(transaction) {
+    transaction.executeSql('CREATE TABLE soiree (date, password)');
   });
   }
 
@@ -13,31 +17,24 @@ function showMessage(message) {
     if (window.cordova.platformId === 'osx') window.alert(message);
     else navigator.notification.alert(message);
 }
-// function stringTest1() {
-//   database.transaction(function(transaction) {
-//     transaction.executeSql("SELECT upper('Test string') AS upperText", [], function(ignored, resultSet) {
-//       showMessage('Got upperText result (ALL CAPS): ' + resultSet.rows.item(0).upperText);
-//     });
-//   }, function(error) {
-//     showMessage('SELECT count error: ' + error.message);
-//   });
-// }
 
-// function showCount() {
-//   database.transaction(function(transaction) {
-//     transaction.executeSql('SELECT count(*) AS recordCount FROM SampleTable', [], function(ignored, resultSet) {
-//       showMessage('RECORD COUNT: ' + resultSet.rows.item(0).recordCount);
-//     });
-//   }, function(error) {
-//     showMessage('SELECT count error: ' + error.message);
-//   });
-// }
+function addRecordUser() {
+  var username = $('nom').val() ;
+  var userpassword = $('mdp').val();
 
-function addRecord() {
+  database.transaction(function(transaction) {
+    transaction.executeSql('INSERT INTO users VALUES (?,?)', [username, userpassword]);
+  }, function(error) {
+    showMessage('INSERT error: ' + error.message);
+  }, function() {
+    goToMap();
+  });
+}
+
+function addRecordSoiree() {
   var username = $('city').val() ;
   var userpassword = $('password').val();
 
-  $('input').val();
   database.transaction(function(transaction) {
     transaction.executeSql('INSERT INTO users VALUES (?,?)', [username, userpassword]);
   }, function(error) {
@@ -47,27 +44,36 @@ function addRecord() {
   });
 }
 
-// function deleteRecords() {
-//   database.transaction(function(transaction) {
-//     transaction.executeSql('DELETE FROM SampleTable');
-//   }, function(error) {
-//     showMessage('DELETE error: ' + error.message);
-//   }, function() {
-//     showMessage('DELETE OK');
-//     ++nextUser;
-//   });
-// }
+function goToMap() {
+   window.location = "map.html";
+}
 
-// function alertTest() {
-//   showMessage('Alert test message');
-// }
+function gotoCreateSoiree() {
+  window.location = "creerSoiree.html";
+}
 
-// function goToPage2() {
-//   window.location = "page2.html";
-// }
+function verify(){
+  var username = $('nom').val();
+  var userpassword = $('mdp').val();
+
+  database.transaction(function(transaction) {
+    transaction.executeSql("SELECT * FROM users where name like ('%"+username+"%) and password like ('%"+userpassword+'%)', []);
+  }, function(error) {
+    showMessage('Recherche impossible');
+  }, function(results) {
+    if (results.row.length===1){
+      goToMap();
+    }
+    else {
+      showMessage("Cette combinaison n'existe pas en base");
+    }
+  });
+}
 
 document.addEventListener('deviceready', function() {
-  $('#creercompte').click(addRecord);
+  $('#creercompte').click(addRecordUser);
+  $('#seconnecter').click(verify);
+  $('addsoiree').click(gotoCreateSoiree);
 
   initDatabase();
 });
