@@ -1,13 +1,13 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
-INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
-INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
-INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
+ADDED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-18:12
 MERGED from [:CordovaLib] /home/amontuwy/After7/platforms/android/CordovaLib/build/intermediates/manifests/full/debug/AndroidManifest.xml:20:1-27:12
-INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
-INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
-INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-17:12
+INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-18:12
+INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:1-18:12
 	package
 		ADDED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:2:102-125
 		INJECTED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml
@@ -102,3 +102,7 @@ uses-feature#android.hardware.location.gps
 ADDED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:16:5-66
 	android:name
 		ADDED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:16:19-63
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:17:5-79
+	android:name
+		ADDED from /home/amontuwy/After7/platforms/android/app/src/main/AndroidManifest.xml:17:22-76

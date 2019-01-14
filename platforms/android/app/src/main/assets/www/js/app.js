@@ -2,6 +2,7 @@ var database = null;
 var map;
 
 var isBrowser = false;
+
 var currentDateFormated = new Date().toLocaleDateString("en-GB"); // DD-MM-YYYY
 
 function initialization() {
@@ -261,14 +262,25 @@ function initMap() {
   }
 }
 
-// function reload() {
-//   google.maps.event.trigger(map, 'resize');
-// }
+function geocoding(){
+  var adresse = "esquelbecq"
+  nativegeocoder.forwardGeocode(success, failure, adresse, { useLocale: true, maxResults: 1 });
+ 
+  function success(coordinates) {
+    var firstResult = coordinates[0];
+   showMessage("The coordinates are latitude = " + firstResult.latitude + " and longitude = " + firstResult.longitude);
+  }
+   
+  function failure(err) {
+    showMessage(err);
+  }
+}
 
 document.addEventListener('deviceready', function () {
   $('#creercompte').click(addRecordUser);
   $('#seconnecter').click(verify);
-  $('#addsoiree').click(gotoCreateSoiree);
+  //$('#addsoiree').click(gotoCreateSoiree);
+  $('#addsoiree').click(geocoding);
   $('#creerSoireeinDB').click(addRecordSoiree);
   initDatabase();
 });
