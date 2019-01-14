@@ -73,14 +73,7 @@ function addRecordUser() {
   var userpassword = $('#mdp').val();
 
   if (username != "" && userpassword != "") {
-    database.transaction(function (transaction) {
-      transaction.executeSql('INSERT INTO users VALUES (?,?)', [username, userpassword]);
-
-    }, function (error) {
-      showMessage('Error in User creation: ' + error.message);
-    }, function () {
-      showMessage('Le compte a été créé avec succes');
-    });
+    verifyuserinbase(username,userpassword);
   } else {
     showMessage('Tous les champs doivent être complétés');
   }
@@ -95,24 +88,84 @@ function addRecordSoiree() {
   var prixsoiree = $('#prix').val();
   var statutsoiree = $('#statut').val();
 
-  database.transaction(function (transaction) {
-    transaction.executeSql('INSERT INTO soirees VALUES (?,?,?,?,?,?,?)', [titresoiree, datesoiree, lieusoiree, descrsoiree, themesoiree, prixsoiree, statutsoiree]);
-  }, function (error) {
-    showMessage('Error in soiree creation ' + error.message);
-  }, function () {
-    showMessage('INSERT OK');
-  });
+  if( titresoiree == null || titresoiree == "" || lieusoiree == null || lieusoiree == "" || descrsoiree == null || descrsoiree == "" ||
+      themesoiree == null || themesoiree == "" || prixsoiree == null || prixsoiree == "" || statutsoiree == null || statutsoiree == ""){
+        alert("Veuillez remplir tous les champs en rouge");
+        if(titresoiree == null || titresoiree == ""){
+          $('#titre').style.borderColor = "red";
+        } else {
+          $('#titre').style.borderColor = "green";
+        }
+        if(titresoiree == null || titresoiree == ""){
+          $('#lieusoiree').style.borderColor = "red";
+        } else {
+          $('#lieusoiree').style.borderColor = "green";
+        }
+        if(titresoiree == null || titresoiree == ""){
+          $('#descrsoiree').style.borderColor = "red";
+        } else {
+          $('#descrsoiree').style.borderColor = "green";
+        }
+        if(titresoiree == null || titresoiree == ""){
+          $('#themesoiree').style.borderColor = "red";
+        } else {
+          $('#themesoiree').style.borderColor = "green";
+        }
+        if(titresoiree == null || titresoiree == ""){
+          $('#prixsoiree').style.borderColor = "red";
+        } else {
+          $('#prixsoiree').style.borderColor = "green";
+        }
+        if(titresoiree == null || titresoiree == ""){
+          $('#statutsoiree').style.borderColor = "red";
+        } else {
+          $('#statutsoiree').style.borderColor = "green";
+        }
+  } else {
+    database.transaction(function (transaction) {
+      transaction.executeSql('INSERT INTO soirees VALUES (?,?,?,?,?,?,?)', [titresoiree, datesoiree, lieusoiree, descrsoiree, themesoiree, prixsoiree, statutsoiree]);
+    }, function (error) {
+      showMessage('Error in soiree creation ' + error.message);
+    }, function () {
+      showMessage('INSERT OK');
+    });
+  }
 }
 
 function gotoCreateSoiree() {
-  reload();
   $("#map").hide();
   $("#search").hide();
   initialization();
   $("#creersoiree").show();
 }
- 
 
+function verifyuserinbase(name,password)
+{
+  database.transaction(function (transaction)
+       {transaction.executeSql('SELECT * FROM users WHERE name=? AND password=?',
+                [name, password],
+                function(transaction,results)
+                {
+                    var len = results.rows.length;
+                    if(len>0)
+                    {  
+                      showMessage("Erreur : le compte existe deja")
+                    }
+                    else{
+                      database.transaction(function (transaction) {
+                        transaction.executeSql('INSERT INTO users VALUES (?,?)', [name, password]);
+                  
+                      }, function (error) {
+                        showMessage('Error in User creation: ' + error.message);
+                      }, function () {
+                        showMessage('Le compte a été créé avec succes');
+                      });
+                    }
+                }, errorCB
+            );
+       },errorCB,successCB
+   );
+}
 
 function verifyuser(name,password)
 {
@@ -125,7 +178,7 @@ function verifyuser(name,password)
                     if(len===1)
                     {  
                       $("#login").hide();
-                      reload();
+                      initMap();
                       $("#map").show();
                       $("#search").show();
                       $("#connected").show();
@@ -208,9 +261,9 @@ function initMap() {
   }
 }
 
-function reload() {
-  google.maps.event.trigger(map, 'resize');
-}
+// function reload() {
+//   google.maps.event.trigger(map, 'resize');
+// }
 
 document.addEventListener('deviceready', function () {
   $('#creercompte').click(addRecordUser);
