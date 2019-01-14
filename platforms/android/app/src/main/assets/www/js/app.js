@@ -54,7 +54,7 @@ function initDatabase() {
   });
 
   database.transaction(function (transaction) {
-    transaction.executeSql('CREATE TABLE soiree (date, password)');
+    transaction.executeSql('CREATE TABLE soirees (titre,date, lieu, descr, theme, prix, statut)');
   });
   $("#map").hide();
   $("#search").hide();
@@ -72,27 +72,36 @@ function addRecordUser() {
   var username = $('#nom').val();
   var userpassword = $('#mdp').val();
 
+  if (username!="" && userpassword!=""){
   database.transaction(function (transaction) {
     transaction.executeSql('INSERT INTO users VALUES (?,?)', [username, userpassword]);
+    
   }, function (error) {
-    showMessage('INSERT error: ' + error.message);
+    showMessage('Error in User creation: ' + error.message);
   }, function () {
     $("#login").hide();
     reload();
     $("#map").show();
     $("#search").show();
     $("#connected").show();
-  });
+  });}else{
+    showMessage('Tous les champs doivent être complétés');
+  }
 }
 
 function addRecordSoiree() {
-  var username = $('#city').val();
-  var userpassword = $('#password').val();
+  var titresoiree = $('#titre').val();
+  var datesoiree = $('#date').val();
+  var lieusoiree = $('#lieu').val();
+  var descrsoiree = $('#descr').val();
+  var themesoiree = $('#theme').val();
+  var prixsoiree = $('#prix').val();
+  var statutsoiree = $('#statut').val();
 
   database.transaction(function (transaction) {
-    transaction.executeSql('INSERT INTO users VALUES (?,?)', [username, userpassword]);
+    transaction.executeSql('INSERT INTO soirees VALUES (?,?,?,?,?,?,?)', [titresoiree,datesoiree,lieusoiree,descrsoiree,themesoiree,prixsoiree,statutsoiree]);
   }, function (error) {
-    showMessage('INSERT error: ' + error.message);
+    showMessage('Error in soiree creation ' + error.message);
   }, function () {
     showMessage('INSERT OK');
   });

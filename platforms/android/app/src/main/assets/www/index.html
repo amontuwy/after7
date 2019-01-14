@@ -24,7 +24,7 @@
             <div class="nav-wrapper pink">
                 <a href="#" class="brand-logo center">AFTER 7</a>
                 <div id="connected">
-                    <ul id="nav-mobile" class="right">
+                    <ul id="nav-mobile" class="center right">
                         <li><a class="waves-effect btn" id="addsoiree">+</a></li>
                     </ul>
                 </div>
@@ -59,33 +59,33 @@
         
                   <div class="row valign-wrapper">
                     <div class="input-field col s10">
-                      <input id="lieu" type="text">
-                      <label for="nom">Lieu</label>
+                      <input id="lieur" type="text">
+                      <label for="lieur">Lieu</label>
                     </div>
                     <a class="btn waves-effect waves-light col s2"><i class="material-icons">location_searching</i></a>
                   </div>
         
                   <div class="row valign-wrapper">
                     <div class="range-field col s6">
-                      <label for="volume">Distance (km)</label>
-                      <input type="range" id="range" min="0" max="100" />
+                      <label for="distancer">Distance (km)</label>
+                      <input type="range" id="distancer" min="0" max="100" />
                     </div>
                     <div class="input-field col s6">
-                      <input name="date" type="date" class="datepicker" onclick="calendar()">
-                      <label for="nom">Date</label>
+                      <input name="dater" type="date" class="datepicker" onclick="calendar()">
+                      <label for="dater">Date</label>
                     </div>
                   </div>
         
                   <div class="row valign-wrapper">
                     <div class="input-field col s4">
-                      <select id="select">
+                      <select id="statutr">
                         <option value="public">Publique</option>
                         <option value="private">Privée</option>
                       </select>
                       <label>Type de soirée</label>
                     </div>
                     <div class="input-field col s8">
-                      <input id="theme" type="text">
+                      <input id="themer" type="text">
                       <label for="theme">Thème</label>
                     </div>
                   </div>
@@ -100,7 +100,7 @@
                         <div class = "file-field input-field">
                           <div class = "btn">
                             <span>Import</span>
-                            <input type = "file" />
+                            <input id="file" type = "file" />
                             </div>
               
                             <div class = "file-path-wrapper">
@@ -117,23 +117,23 @@
               
                           <div class="input-field">
                             <i class="material-icons md-16 prefix">event_outline</i>
-                            <input name="date" type="date" class="datepicker" onclick="calendar()" >
-                            <label for="nom">Date</label>
+                            <input id="date" name="date" type="date" class="datepicker" onclick="calendar()" >
+                            <label for="date">Date</label>
                           </div>
               
                           <div class="input-field">
                             <i class="material-icons md-16 prefix">place_outline</i>
                             <input id="lieu" type="text">
-                            <label for="nom">Lieu</label>
+                            <label for="lieu">Lieu</label>
                           </div>
               
                           <div class="input-field">
                             <input id="descr" type="text">
-                            <label for="nom">Description</label>
+                            <label for="descr">Description</label>
                           </div>
               
                           <div class="input-field">
-                            <select>
+                            <select id="theme">
                               <option value="" disabled selected>Choisir votre thème</option>
                               <option value="1">Disco</option>
                               <option value="2">Déguisement</option>
@@ -151,24 +151,22 @@
               
                             <div class="input-field col s4">
                               <div>
-                                <input name="argent" type="number">
+                                <input id="prix" name="argent" type="number">
                                 <span class="helper-text" data-error="wrong" data-success="right">Montant en euros</span>
                               </div>
                             </div>
                           </div>
 
                           <div class="row col s12 valign-wrapper">
-              
-                                <!--<div id="slider-price" class="input-field col s8" min="0" max="1000"></div> -->
-                                <p class="range-field col s6">
+                                <p class="range-field col s4">
                                   <label>Type de soirée</label>
                                 </p>
                   
-                                <div class="input-field col s6">
+                                <div class="input-field col s8">
                                         <div class="switch">
                                                 <label>
                                                   Publique
-                                                  <input type="checkbox">
+                                                  <input id="statut" type="checkbox">
                                                   <span class="lever"></span>
                                                   Privée
                                                 </label>

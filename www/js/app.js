@@ -6,38 +6,38 @@ var currentDateFormated = new Date().toLocaleDateString("en-GB"); // DD-MM-YYYY
 
 function initialization() {
   // $(document).ready(function(){
-    var currentDateFormated = new Date().toISOString().split("T")[0] // MM-DD-YYYY
-    var date = $('input[name=date]');
-    date.attr({
-      "min" : currentDateFormated
-    });
-    date.val(currentDateFormated);
+  var currentDateFormated = new Date().toISOString().split("T")[0] // MM-DD-YYYY
+  var date = $('input[name=date]');
+  date.attr({
+    "min": currentDateFormated
+  });
+  date.val(currentDateFormated);
 
-    $('input[name=range]').on('input',function(e){
-      $('input[name=argent]').val($('input[name=range]').val())
-    });
+  $('input[name=range]').on('input', function (e) {
+    $('input[name=argent]').val($('input[name=range]').val())
+  });
 
-    $('input[name=argent]').on('input',function(e){
-      $('input[name=range]').val($('input[name=argent]').val())
-    });
+  $('input[name=argent]').on('input', function (e) {
+    $('input[name=range]').val($('input[name=argent]').val())
+  });
 
-    $('select').formSelect();
+  $('select').formSelect();
   // });
   // document.addEventListener("deviceready", onDeviceReady, false);
 }
 
 
-function calendar(){
-  if(isBrowser){
+function calendar() {
+  if (isBrowser) {
     var options = {
       date: new Date(),
       mode: 'date',
       minDate: + currentDate
     };
 
-    datePicker.show(options, function(date){
-     //alert("date result " + date);     // not working
-     $('input[name=date]').val(date.toLocaleDateString("en-GB"));
+    datePicker.show(options, function (date) {
+      //alert("date result " + date);     // not working
+      $('input[name=date]').val(date.toLocaleDateString("en-GB"));
     });
   }
 }
@@ -54,7 +54,7 @@ function initDatabase() {
   });
 
   database.transaction(function (transaction) {
-    transaction.executeSql('CREATE TABLE soiree (date, password)');
+    transaction.executeSql('CREATE TABLE soirees (titre,date, lieu, descr, theme, prix, statut)');
   });
   $("#map").hide();
   $("#search").hide();
@@ -72,27 +72,33 @@ function addRecordUser() {
   var username = $('#nom').val();
   var userpassword = $('#mdp').val();
 
-  database.transaction(function (transaction) {
-    transaction.executeSql('INSERT INTO users VALUES (?,?)', [username, userpassword]);
-  }, function (error) {
-    showMessage('INSERT error: ' + error.message);
-  }, function () {
-    $("#login").hide();
-    reload();
-    $("#map").show();
-    $("#search").show();
-    $("#connected").show();
-  });
+  if (username != "" && userpassword != "") {
+    database.transaction(function (transaction) {
+      transaction.executeSql('INSERT INTO users VALUES (?,?)', [username, userpassword]);
+
+    }, function (error) {
+      showMessage('Error in User creation: ' + error.message);
+    }, function () {
+      showMessage('Le compte a été créé avec succes');
+    });
+  } else {
+    showMessage('Tous les champs doivent être complétés');
+  }
 }
 
 function addRecordSoiree() {
-  var username = $('#city').val();
-  var userpassword = $('#password').val();
+  var titresoiree = $('#titre').val();
+  var datesoiree = $('#date').val();
+  var lieusoiree = $('#lieu').val();
+  var descrsoiree = $('#descr').val();
+  var themesoiree = $('#theme').val();
+  var prixsoiree = $('#prix').val();
+  var statutsoiree = $('#statut').val();
 
   database.transaction(function (transaction) {
-    transaction.executeSql('INSERT INTO users VALUES (?,?)', [username, userpassword]);
+    transaction.executeSql('INSERT INTO soirees VALUES (?,?,?,?,?,?,?)', [titresoiree, datesoiree, lieusoiree, descrsoiree, themesoiree, prixsoiree, statutsoiree]);
   }, function (error) {
-    showMessage('INSERT error: ' + error.message);
+    showMessage('Error in soiree creation ' + error.message);
   }, function () {
     showMessage('INSERT OK');
   });
@@ -109,26 +115,38 @@ function gotoCreateSoiree() {
 function verify() {
   var username = $('#nom').val();
   var userpassword = $('#mdp').val();
+  var query = "SELECT * from users WHERE (name LIKE ?)";
 
-  database.transaction(function (transaction) {
-    transaction.executeSql("SELECT * FROM users where name like ('%" + username + "%) and password like ('%" + userpassword + '%)', []);
-  }, function (error) {
-    showMessage('Recherche impossible');
-  }, function (results) {
-    if (results.row.length === 1) {
-      goToMap();
-    }
-    else {
-      showMessage("Cette combinaison n'existe pas en base");
-    }
-  });
+$cordovaSQLite.execute(DBname, query, ['%'+word_name+'%']).then(function(res) {
+
+});
+  if (username != "" && userpassword != "") {
+    database.transaction(function (transaction) {
+      transaction.executeSql("SELECT * FROM users where name like ('%" + username + "%) and password like ('%" + userpassword + '%)', []);
+    }, function (error) {
+      showMessage('Recherche impossible');
+    }, function (results) {
+      if (results.row.length === 1) {
+        $("#login").hide();
+        reload();
+        $("#map").show();
+        $("#search").show();
+        $("#connected").show();
+      }
+      else {
+        showMessage("Cette combinaison n'existe pas en base");
+      }
+    });
+  } else {
+    showMessage('Tous les champs doivent être renseignés')
+  }
 }
 
 function initMap() {
   // The location of Rennes
-  var Rennes = {lat: 48.117180,lng: -1.677770};
+  var Rennes = { lat: 48.117180, lng: -1.677770 };
   // The location of Université
-  var Univ = {lat: 48.113981, lng: -1.638361 };
+  var Univ = { lat: 48.113981, lng: -1.638361 };
   // The map, centered at Moncuq
   var contenuInfoBulle = "Vous êtes ici";
 
@@ -158,7 +176,7 @@ function initMap() {
     }, function () {
       handleLocationError(true, infoWindow, map.getCenter());
     });
-  } 
+  }
   else {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
@@ -175,7 +193,7 @@ function initMap() {
 }
 
 function reload() {
-    google.maps.event.trigger(map, 'resize');
+  google.maps.event.trigger(map, 'resize');
 }
 
 document.addEventListener('deviceready', function () {
