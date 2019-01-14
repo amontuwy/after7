@@ -196,6 +196,7 @@ function verifyuser(name,password)
             );
        },errorCB,successCB
    );
+
 }
 
 function successCB(){}
@@ -216,25 +217,37 @@ function verify() {
   }
 }
 
+
 function initMap() {
   // The location of Rennes
   var Rennes = { lat: 48.117180, lng: -1.677770 };
   // The location of Université
   var Univ = { lat: 48.113981, lng: -1.638361 };
   // The map, centered at Moncuq
-  var contenuInfoBulle = "Vous êtes ici";
+  var contenuInfoBulle = "Soirée ici";
 
   map = new google.maps.Map(
     document.getElementById('map'), { zoom: 12, center: Rennes });
 
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({ position: Univ, map: map }); var infoBulle = new google.maps.InfoWindow({
-    content: contenuInfoBulle
-  })
-  google.maps.event.addListener(marker, 'click', function () {
-    infoBulle.open(map, marker);
-  });
-
+//   var marker = new google.maps.Marker({ position: Univ, map: map }); var infoBulle = new google.maps.InfoWindow({
+//     content: contenuInfoBulle
+//   })
+//  google.maps.event.addListener(marker, 'click', function () {
+//      infoBulle.open(map, marker);
+//    });
+  
+  database.transaction(function (transaction)
+       {transaction.executeSql('SELECT * FROM soirees1',
+                [],
+                function(transaction,results)
+                { showMessage(results.array);
+                  results.rows.forEach(element => {
+                  showMessage("valeur en base : ");  
+                }, errorCB
+            );
+       },errorCB,successCB
+      );});
+ 
   infoWindow = new google.maps.InfoWindow;
 
   if (navigator.geolocation) {
