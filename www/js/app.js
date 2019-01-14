@@ -2,11 +2,13 @@ var database = null;
 var map;
 
 var isBrowser = false;
+var latsoiree;
+var lngsoiree;
 
 var currentDateFormated = new Date().toLocaleDateString("en-GB"); // DD-MM-YYYY
 
 function initialization() {
-  // $(document).ready(function(){
+  
   var currentDateFormated = new Date().toISOString().split("T")[0] // MM-DD-YYYY
   var date = $('input[name=date]');
   date.attr({
@@ -23,8 +25,7 @@ function initialization() {
   });
 
   $('select').formSelect();
-  // });
-  // document.addEventListener("deviceready", onDeviceReady, false);
+
 }
 
 
@@ -55,7 +56,7 @@ function initDatabase() {
   });
 
   database.transaction(function (transaction) {
-    transaction.executeSql('CREATE TABLE soirees1 (titre, date, lieu, geocod, descr, theme, prix, statut)');
+    transaction.executeSql('CREATE TABLE events (titre, date, lieu, geocodlat, geocodlng, descr, theme, prix, statut)');
   });
   $("#map").hide();
   $("#search").hide();
@@ -123,12 +124,16 @@ function addRecordSoiree() {
           $('#statutsoiree').style.borderColor = "green";
         }
   } else {
+    geocoding(lieusoiree);
     database.transaction(function (transaction) {
-      transaction.executeSql('INSERT INTO soirees1 VALUES (?,?,?,?,?,?,?,?)', [titresoiree, datesoiree, lieusoiree, geocoding(lieusoiree), descrsoiree, themesoiree, prixsoiree, statutsoiree]);
+      transaction.executeSql('INSERT INTO events VALUES (?,?,?,?,?,?,?,?,?)', [titresoiree, datesoiree, lieusoiree, latsoiree, lngsoiree, descrsoiree, themesoiree, prixsoiree, statutsoiree]);
     }, function (error) {
       showMessage('Error in soiree creation ' + error.message);
+      coord=null;
     }, function () {
       showMessage('Votre soirée a bien été créée');
+      latsoiree=null; //on remet la variable generale à 0
+      lngsoiree=null;
       initMap();
       $("#map").show();
       $("#search").show();
@@ -224,28 +229,28 @@ function initMap() {
   // The location of Université
   var Univ = { lat: 48.113981, lng: -1.638361 };
   // The map, centered at Moncuq
-  var contenuInfoBulle = "Soirée ici";
+//  var contenuInfoBulle = "Soirée ici";
 
   map = new google.maps.Map(
     document.getElementById('map'), { zoom: 12, center: Rennes });
 
-//   var marker = new google.maps.Marker({ position: Univ, map: map }); var infoBulle = new google.maps.InfoWindow({
-//     content: contenuInfoBulle
-//   })
-//  google.maps.event.addListener(marker, 'click', function () {
-//      infoBulle.open(map, marker);
-//    });
-  
   database.transaction(function (transaction)
-       {transaction.executeSql('SELECT * FROM soirees1',
-                [],
-                function(transaction,results)
-                { showMessage(results.array);
-                  results.rows.forEach(element => {
-                  showMessage("valeur en base : ");  
-                }, errorCB
-            );
-       },errorCB,successCB
+       {transaction.executeSql('SELECT * FROM events',
+          [],
+          function(transaction,results)
+            { var taille = results.rows.length;
+              for (let i =0;i<taille;i++){
+                console.log('latitude : '+results.rows.item(i)['geocodlat']+' longitude : '+results.rows.item(i)['geocodlng']);
+                var possoiree = new google.maps.LatLng(results.rows.item(i)['geocodlat'], results.rows.item(i)['geocodlng']);
+                var marker = new google.maps.Marker({ position: possoiree, map: map }); 
+                var infoBulle = new google.maps.InfoWindow({
+                       content: "Titre : "+results.rows.item(i)['titre']+" Date:"+results.rows.item(i)['date']
+                    });
+                google.maps.event.addListener(marker, 'click', function () {
+                            infoBulle.open(map, marker);
+                         });
+              }
+            },errorCB,successCB
       );});
  
   infoWindow = new google.maps.InfoWindow;
@@ -283,8 +288,8 @@ function geocoding(adresse){
   nativegeocoder.forwardGeocode(success, failure, adresse, { useLocale: true, maxResults: 1 });
  
   function success(coordinates) {
-    return firstResult = coordinates[0];
-   //showMessage("The coordinates are latitude = " + firstResult.latitude + " and longitude = " + firstResult.longitude);
+   latsoiree = coordinates[0].latitude;
+   lngsoiree =coordinates[0].longitude;
   }
    
   function failure(err) {
@@ -296,7 +301,6 @@ document.addEventListener('deviceready', function () {
   $('#creercompte').click(addRecordUser);
   $('#seconnecter').click(verify);
   $('#addsoiree').click(gotoCreateSoiree);
-  //$('#addsoiree').click(geocoding);
   $('#creerSoireeinDB').click(addRecordSoiree);
   initDatabase();
 });
