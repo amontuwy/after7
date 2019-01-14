@@ -111,34 +111,50 @@ function gotoCreateSoiree() {
   initialization();
   $("#creersoiree").show();
 }
+ 
+
+
+function verifyuser(name,password)
+{
+  database.transaction(function (transaction)
+       {transaction.executeSql('SELECT * FROM users WHERE name=? AND password=?',
+                [name, password],
+                function(transaction,results)
+                {
+                    var len = results.rows.length;
+                    if(len===1)
+                    {  
+                      $("#login").hide();
+                      reload();
+                      $("#map").show();
+                      $("#search").show();
+                      $("#connected").show();
+                    }
+                    else{
+                      console.log("pas de user correspondant")
+                      showMessage("Ce compte n'existe pas");
+                    }
+                }, errorCB
+            );
+       },errorCB,successCB
+   );
+}
+
+function successCB(){}
+
+function errorCB(){
+ 
+}
 
 function verify() {
   var username = $('#nom').val();
   var userpassword = $('#mdp').val();
-  var query = "SELECT * from users WHERE (name LIKE ?)";
 
-$cordovaSQLite.execute(DBname, query, ['%'+word_name+'%']).then(function(res) {
-
-});
   if (username != "" && userpassword != "") {
-    database.transaction(function (transaction) {
-      transaction.executeSql("SELECT * FROM users where name like ('%" + username + "%) and password like ('%" + userpassword + '%)', []);
-    }, function (error) {
-      showMessage('Recherche impossible');
-    }, function (results) {
-      if (results.row.length === 1) {
-        $("#login").hide();
-        reload();
-        $("#map").show();
-        $("#search").show();
-        $("#connected").show();
-      }
-      else {
-        showMessage("Cette combinaison n'existe pas en base");
-      }
-    });
-  } else {
-    showMessage('Tous les champs doivent être renseignés')
+    verifyuser(username,userpassword);
+  }
+   else {
+    showMessage('Tous les champs doivent être renseignés');
   }
 }
 

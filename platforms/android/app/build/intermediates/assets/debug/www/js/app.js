@@ -6,38 +6,38 @@ var currentDateFormated = new Date().toLocaleDateString("en-GB"); // DD-MM-YYYY
 
 function initialization() {
   // $(document).ready(function(){
-    var currentDateFormated = new Date().toISOString().split("T")[0] // MM-DD-YYYY
-    var date = $('input[name=date]');
-    date.attr({
-      "min" : currentDateFormated
-    });
-    date.val(currentDateFormated);
+  var currentDateFormated = new Date().toISOString().split("T")[0] // MM-DD-YYYY
+  var date = $('input[name=date]');
+  date.attr({
+    "min": currentDateFormated
+  });
+  date.val(currentDateFormated);
 
-    $('input[name=range]').on('input',function(e){
-      $('input[name=argent]').val($('input[name=range]').val())
-    });
+  $('input[name=range]').on('input', function (e) {
+    $('input[name=argent]').val($('input[name=range]').val())
+  });
 
-    $('input[name=argent]').on('input',function(e){
-      $('input[name=range]').val($('input[name=argent]').val())
-    });
+  $('input[name=argent]').on('input', function (e) {
+    $('input[name=range]').val($('input[name=argent]').val())
+  });
 
-    $('select').formSelect();
+  $('select').formSelect();
   // });
   // document.addEventListener("deviceready", onDeviceReady, false);
 }
 
 
-function calendar(){
-  if(isBrowser){
+function calendar() {
+  if (isBrowser) {
     var options = {
       date: new Date(),
       mode: 'date',
       minDate: + currentDate
     };
 
-    datePicker.show(options, function(date){
-     //alert("date result " + date);     // not working
-     $('input[name=date]').val(date.toLocaleDateString("en-GB"));
+    datePicker.show(options, function (date) {
+      //alert("date result " + date);     // not working
+      $('input[name=date]').val(date.toLocaleDateString("en-GB"));
     });
   }
 }
@@ -72,19 +72,16 @@ function addRecordUser() {
   var username = $('#nom').val();
   var userpassword = $('#mdp').val();
 
-  if (username!="" && userpassword!=""){
-  database.transaction(function (transaction) {
-    transaction.executeSql('INSERT INTO users VALUES (?,?)', [username, userpassword]);
-    
-  }, function (error) {
-    showMessage('Error in User creation: ' + error.message);
-  }, function () {
-    $("#login").hide();
-    reload();
-    $("#map").show();
-    $("#search").show();
-    $("#connected").show();
-  });}else{
+  if (username != "" && userpassword != "") {
+    database.transaction(function (transaction) {
+      transaction.executeSql('INSERT INTO users VALUES (?,?)', [username, userpassword]);
+
+    }, function (error) {
+      showMessage('Error in User creation: ' + error.message);
+    }, function () {
+      showMessage('Le compte a été créé avec succes');
+    });
+  } else {
     showMessage('Tous les champs doivent être complétés');
   }
 }
@@ -99,7 +96,7 @@ function addRecordSoiree() {
   var statutsoiree = $('#statut').val();
 
   database.transaction(function (transaction) {
-    transaction.executeSql('INSERT INTO soirees VALUES (?,?,?,?,?,?,?)', [titresoiree,datesoiree,lieusoiree,descrsoiree,themesoiree,prixsoiree,statutsoiree]);
+    transaction.executeSql('INSERT INTO soirees VALUES (?,?,?,?,?,?,?)', [titresoiree, datesoiree, lieusoiree, descrsoiree, themesoiree, prixsoiree, statutsoiree]);
   }, function (error) {
     showMessage('Error in soiree creation ' + error.message);
   }, function () {
@@ -114,30 +111,58 @@ function gotoCreateSoiree() {
   initialization();
   $("#creersoiree").show();
 }
+ 
+
+
+function verifyuser(name,password)
+{
+  database.transaction(function (transaction)
+       {transaction.executeSql('SELECT * FROM users WHERE name=? AND password=?',
+                [name, password],
+                function(transaction,results)
+                {
+                    var len = results.rows.length;
+                    if(len===1)
+                    {  
+                      $("#login").hide();
+                      reload();
+                      $("#map").show();
+                      $("#search").show();
+                      $("#connected").show();
+                    }
+                    else{
+                      console.log("pas de user correspondant")
+                      showMessage("Ce compte n'existe pas");
+                    }
+                }, errorCB
+            );
+       },errorCB,successCB
+   );
+}
+
+function successCB(){}
+
+function errorCB(){
+ 
+}
 
 function verify() {
   var username = $('#nom').val();
   var userpassword = $('#mdp').val();
 
-  database.transaction(function (transaction) {
-    transaction.executeSql("SELECT * FROM users where name like ('%" + username + "%) and password like ('%" + userpassword + '%)', []);
-  }, function (error) {
-    showMessage('Recherche impossible');
-  }, function (results) {
-    if (results.row.length === 1) {
-      goToMap();
-    }
-    else {
-      showMessage("Cette combinaison n'existe pas en base");
-    }
-  });
+  if (username != "" && userpassword != "") {
+    verifyuser(username,userpassword);
+  }
+   else {
+    showMessage('Tous les champs doivent être renseignés');
+  }
 }
 
 function initMap() {
   // The location of Rennes
-  var Rennes = {lat: 48.117180,lng: -1.677770};
+  var Rennes = { lat: 48.117180, lng: -1.677770 };
   // The location of Université
-  var Univ = {lat: 48.113981, lng: -1.638361 };
+  var Univ = { lat: 48.113981, lng: -1.638361 };
   // The map, centered at Moncuq
   var contenuInfoBulle = "Vous êtes ici";
 
@@ -167,7 +192,7 @@ function initMap() {
     }, function () {
       handleLocationError(true, infoWindow, map.getCenter());
     });
-  } 
+  }
   else {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
@@ -184,7 +209,7 @@ function initMap() {
 }
 
 function reload() {
-    google.maps.event.trigger(map, 'resize');
+  google.maps.event.trigger(map, 'resize');
 }
 
 document.addEventListener('deviceready', function () {
