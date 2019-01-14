@@ -15,11 +15,11 @@ function initialization() {
   date.val(currentDateFormated);
 
   $('input[name=range]').on('input', function (e) {
-    $('input[name=argent]').val($('input[name=range]').val())
+    $('input[name=prix]').val($('input[name=range]').val())
   });
 
-  $('input[name=argent]').on('input', function (e) {
-    $('input[name=range]').val($('input[name=argent]').val())
+  $('input[name=prix]').on('input', function (e) {
+    $('input[name=range]').val($('input[name=prix]').val())
   });
 
   $('select').formSelect();
@@ -55,7 +55,7 @@ function initDatabase() {
   });
 
   database.transaction(function (transaction) {
-    transaction.executeSql('CREATE TABLE soirees (titre,date, lieu, descr, theme, prix, statut)');
+    transaction.executeSql('CREATE TABLE soirees1 (titre, date, lieu, geocod, descr, theme, prix, statut)');
   });
   $("#map").hide();
   $("#search").hide();
@@ -124,11 +124,15 @@ function addRecordSoiree() {
         }
   } else {
     database.transaction(function (transaction) {
-      transaction.executeSql('INSERT INTO soirees VALUES (?,?,?,?,?,?,?)', [titresoiree, datesoiree, lieusoiree, descrsoiree, themesoiree, prixsoiree, statutsoiree]);
+      transaction.executeSql('INSERT INTO soirees1 VALUES (?,?,?,?,?,?,?,?)', [titresoiree, datesoiree, lieusoiree, geocoding(lieusoiree), descrsoiree, themesoiree, prixsoiree, statutsoiree]);
     }, function (error) {
       showMessage('Error in soiree creation ' + error.message);
     }, function () {
-      showMessage('INSERT OK');
+      showMessage('Votre soirée a bien été créée');
+      initMap();
+      $("#map").show();
+      $("#search").show();
+      $("#creersoiree").hide();
     });
   }
 }
@@ -262,13 +266,12 @@ function initMap() {
   }
 }
 
-function geocoding(){
-  var adresse = "esquelbecq"
+function geocoding(adresse){
   nativegeocoder.forwardGeocode(success, failure, adresse, { useLocale: true, maxResults: 1 });
  
   function success(coordinates) {
-    var firstResult = coordinates[0];
-   showMessage("The coordinates are latitude = " + firstResult.latitude + " and longitude = " + firstResult.longitude);
+    return firstResult = coordinates[0];
+   //showMessage("The coordinates are latitude = " + firstResult.latitude + " and longitude = " + firstResult.longitude);
   }
    
   function failure(err) {
@@ -279,8 +282,8 @@ function geocoding(){
 document.addEventListener('deviceready', function () {
   $('#creercompte').click(addRecordUser);
   $('#seconnecter').click(verify);
-  //$('#addsoiree').click(gotoCreateSoiree);
-  $('#addsoiree').click(geocoding);
+  $('#addsoiree').click(gotoCreateSoiree);
+  //$('#addsoiree').click(geocoding);
   $('#creerSoireeinDB').click(addRecordSoiree);
   initDatabase();
 });

@@ -40,7 +40,7 @@
                     </div>
         
                     <div class="input-field">
-                        <input id="mdp" type="text">
+                        <input id="mdp" type="password">
                         <label for="mdp">Mot de passe</label>
                     </div>
         
@@ -111,7 +111,7 @@
               
                           <div class="input-field">
                             <i class="material-icons md-16 prefix">title_outline</i>
-                            <input name="titre" type="text">
+                            <input name="titre" id="titre" type="text">
                             <label for="titre">Titre de la soirée</label>
                           </div>
               
@@ -123,17 +123,17 @@
               
                           <div class="input-field">
                             <i class="material-icons md-16 prefix">place_outline</i>
-                            <input id="lieu" type="text">
+                            <input id="lieu" name="lieu" type="text">
                             <label for="lieu">Lieu</label>
                           </div>
               
                           <div class="input-field">
-                            <input id="descr" type="text">
+                            <input id="descr" name="descr" type="text">
                             <label for="descr">Description</label>
                           </div>
               
                           <div class="input-field">
-                            <select id="theme">
+                            <select id="theme" name="theme">
                               <option value="" disabled selected>Choisir votre thème</option>
                               <option value="1">Disco</option>
                               <option value="2">Déguisement</option>
@@ -151,7 +151,7 @@
               
                             <div class="input-field col s4">
                               <div>
-                                <input id="prix" name="argent" type="number">
+                                <input id="prix" name="prix" type="number">
                                 <span class="helper-text" data-error="wrong" data-success="right">Montant en euros</span>
                               </div>
                             </div>
@@ -166,7 +166,7 @@
                                         <div class="switch">
                                                 <label>
                                                   Publique
-                                                  <input id="statut" type="checkbox">
+                                                  <input id="statut" name="statut" type="checkbox">
                                                   <span class="lever"></span>
                                                   Privée
                                                 </label>
