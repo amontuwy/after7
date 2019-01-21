@@ -28,7 +28,6 @@ function initialization() {
 
 }
 
-
 function calendar() {
   if (isBrowser) {
     var options = {
@@ -221,7 +220,6 @@ function verify() {
     showMessage('Tous les champs doivent être renseignés');
   }
 }
-
 
 function initMap() {
   // The location of Rennes

@@ -11,11 +11,11 @@ function initialization() {
     date.val(currentDateFormated);
 
     $('input[name=range]').on('input',function(e){
-      $('input[name=argent]').val($('input[name=range]').val())
+      $('input[name=prix]').val($('input[name=range]').val())
     });
 
-    $('input[name=argent]').on('input',function(e){
-      $('input[name=range]').val($('input[name=argent]').val())
+    $('input[name=prix]').on('input',function(e){
+      $('input[name=range]').val($('input[name=prix]').val())
     });
 
     $('select').formSelect();
