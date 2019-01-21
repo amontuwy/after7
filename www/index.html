@@ -1,191 +1,199 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8"/>
-        <!-- <meta http-equiv="Content-Security-Policy" content="default-src data: gap: https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *"> -->
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" href="css/materialize.min.css">
-        <link rel="stylesheet" href="css/index.css">
-        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-        <title>After 7</title>
-        <style>
-            /* Set the size of the div element that contains the map */
+<head>
+  <meta charset="utf-8" />
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src data: gap: https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *"> -->
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+  <link rel="stylesheet" href="css/materialize.min.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <title>After 7</title>
+  <style>
+    /* Set the size of the div element that contains the map */
             #map {
                 height: 250pt;  /* The height is 100 % */
                 width: 100%;  /* The width is the width of the web page */
                 }
         </style>
-    </head>
-    <body>
-        <nav>
-            <div class="nav-wrapper pink">
-                <a href="#" class="brand-logo center">AFTER 7</a>
-                <div id="connected">
-                    <ul id="nav-mobile" class="center right">
-                        <li><a class="waves-effect btn-small" id="addsoiree">+</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+</head>
 
-                <!-- login module -->
-        <div id="login" class="card-panel center-align">
-                <form>
-                    <div class="input-field">
-                        <input id="nom" type="text">
-                        <label for="nom">Nom d'utilisateur</label>
-                    </div>
+<body>
+  <nav>
+    <div class="nav-wrapper pink">
+      <div id="comeback">
+        <ul id="nav-mobile" class="left">
+          <li><a class="waves-effect btn-small" id="back"><i class="material-icons left">keyword_backspace</i></a></li>
+        </ul>
+      </div>
+      <a href="#" class="brand-logo center">AFTER 7</a>
+      <div id="connected">
+        <ul id="nav-mobile" class="right">
+          <li><a class="waves-effect btn-small" id="addsoiree">+</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-                    <div class="input-field">
-                        <input id="mdp" type="password">
-                        <label for="mdp">Mot de passe</label>
-                    </div>
+  <!-- login module -->
+  <div id="login" class="card-panel center-align">
+    <form>
+      <div class="input-field">
+        <input id="nom" type="text">
+        <label for="nom">Nom d'utilisateur</label>
+      </div>
 
-                    <a class="waves-effect btn" id="creercompte">Creer un compte</a>
-                </form>
-                <br/>
-                <a class="waves-effect btn" id="seconnecter">Se connecter</a>
-                </div>
+      <div class="input-field">
+        <input id="mdp" type="password">
+        <label for="mdp">Mot de passe</label>
+      </div>
 
-        <!--The div element for the map -->
-        <div id="map"></div>
+      <a class="waves-effect btn" id="creercompte">Creer un compte</a>
+    </form>
+    <br />
+    <a class="waves-effect btn" id="seconnecter">Se connecter</a>
+  </div>
 
-        <!--The div of party search -->
-        <div id="search" class="card-panel center-align">
-                <form>
+  <!--The div element for the map -->
+  <div id="map"></div>
 
-                  <div class="row valign-wrapper">
-                    <div class="input-field col s10">
-                      <input id="lieur" type="text">
-                      <label for="lieur">Lieu</label>
-                    </div>
-                    <a class="btn waves-effect waves-light col s2"><i class="material-icons">location_searching</i></a>
-                  </div>
+  <!--The div of party search -->
+  <div id="search" class="card-panel center-align">
+    <form>
 
-                  <div class="row valign-wrapper">
-                    <div class="range-field col s6">
-                      <label for="distancer">Distance (km)</label>
-                      <input type="range" id="distancer" min="0" max="100" />
-                    </div>
-                    <div class="input-field col s6">
-                      <input name="dater" type="date" class="datepicker" onclick="calendar()">
-                      <label for="dater">Date</label>
-                    </div>
-                  </div>
+      <div class="row valign-wrapper">
+        <div class="input-field col s10">
+          <input id="lieur" type="text">
+          <label for="lieur">Lieu</label>
+        </div>
+        <a class="btn waves-effect waves-light col s2"><i class="material-icons">location_searching</i></a>
+      </div>
 
-                  <div class="row valign-wrapper">
-                    <div class="input-field col s4">
-                      <select id="statutr">
-                        <option value="public">Publique</option>
-                        <option value="private">Privée</option>
-                      </select>
-                      <label>Type de soirée</label>
-                    </div>
-                    <div class="input-field col s8">
-                      <input id="themer" type="text">
-                      <label for="theme">Thème</label>
-                    </div>
-                  </div>
+      <div class="row valign-wrapper">
+        <div class="range-field col s6">
+          <label for="distancer">Distance (km)</label>
+          <input type="range" id="distancer" min="0" max="100" />
+        </div>
+        <div class="input-field col s6">
+          <input name="dater" type="date" class="datepicker" onclick="calendar()">
+          <label for="dater">Date</label>
+        </div>
+      </div>
 
-                  <a class="waves-effect btn" id="searchsoiree">Rechercher</a>
-                </form>
-              </div>
+      <div class="row valign-wrapper">
+        <div class="input-field col s4">
+          <select id="statutr">
+            <option value="public">Publique</option>
+            <option value="private">Privée</option>
+          </select>
+          <label>Type de soirée</label>
+        </div>
+        <div class="input-field col s8">
+          <input id="themer" type="text">
+          <label for="theme">Thème</label>
+        </div>
+      </div>
 
-        <!--creer soiree-->
-        <div id="creersoiree" class="card-panel center-align">
-                <form class="col s12">
-                        <div class = "file-field input-field">
-                          <div class = "btn">
-                            <span>Import</span>
-                            <input id="file" type = "file" />
-                            </div>
+      <a class="waves-effect btn" id="searchsoiree">Rechercher</a>
+    </form>
+  </div>
 
-                            <div class = "file-path-wrapper">
-                              <input class = "file-path validate" type = "text"  placeholder = "Importez votre banière" />
-                            </div>
+  <!--creer soiree-->
+  <div id="creersoiree" class="card-panel center-align">
+    <form class="col s12">
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>Import</span>
+          <input id="file" type="file" />
+        </div>
 
-                        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" placeholder="Importez votre banière" />
+        </div>
 
-                          <div class="input-field">
-                            <i class="material-icons md-16 prefix">title_outline</i>
-                            <input name="titre" id="titre" type="text">
-                            <label for="titre">Titre de la soirée</label>
-                          </div>
+      </div>
 
-                          <div class="input-field">
-                            <i class="material-icons md-16 prefix">event_outline</i>
-                            <input id="date" name="date" type="date" class="datepicker" onclick="calendar()" >
-                            <label for="date">Date</label>
-                          </div>
+      <div class="input-field">
+        <i class="material-icons md-16 prefix">title_outline</i>
+        <input name="titre" id="titre" type="text" onchange="validTitre(this.value)" required>
+        <label id="titreLabel" for="titre">Titre de la soirée <b style="color:red;">*</b></label>
+      </div>
 
-                          <div class="input-field">
-                            <i class="material-icons md-16 prefix">place_outline</i>
-                            <input id="lieu" name="lieu" type="text">
-                            <label for="lieu">Lieu</label>
-                          </div>
+      <div class="input-field">
+        <i class="material-icons md-16 prefix">event_outline</i>
+        <input id="date" name="date" type="date" class="datepicker" onclick="calendar()" onchange="validDate(this.value)"
+          required>
+        <label id="dateLabel" for="date">Date <b style="color:red;">*</b></label>
+      </div>
 
-                          <div class="input-field">
-                            <input id="descr" name="descr" type="text">
-                            <label for="descr">Description</label>
-                          </div>
+      <div class="input-field">
+        <i class="material-icons md-16 prefix">place_outline</i>
+        <input id="lieu" name="lieu" type="text" onchange="validLieu(this.value)" required>
+        <label id="lieuLabel" for="lieu">Lieu <b style="color:red;">*</b></label>
+      </div>
 
-                          <div class="input-field">
-                            <select id="theme" name="theme">
-                              <option value="" disabled selected>Choisir votre thème</option>
-                              <option value="1">Disco</option>
-                              <option value="2">Déguisement</option>
-                              <option value="3">Country</option>
-                              <option value="4">Custom</option>
-                            </select>
-                            <label>Thème</label>
-                          </div>
+      <div class="input-field">
+        <input id="descr" name="descr" type="text" required>
+        <label for="descr">Description</label>
+      </div>
 
-                          <div class="row col s12 valign-wrapper">
+      <div class="input-field">
+        <select id="theme" name="theme" onchange="validTheme(this.value)">
+          <option value="" disabled selected>Choisir votre thème</option>
+          <option value="1">Disco</option>
+          <option value="2">Déguisement</option>
+          <option value="3">Country</option>
+          <option value="4">Custom</option>
+        </select>
+        <label id="themeLabel">Thème <b style="color:red;">*</b></label>
+      </div>
 
-                            <!--<div id="slider-price" class="input-field col s8" min="0" max="1000"></div> -->
-                            <p class="range-field col s8">
-                              <input type="range" name="range" min="0" max="100"/>
-                            </p>
+      <div class="row col s12 valign-wrapper">
 
-                            <div class="input-field col s4">
-                              <div>
-                                <input id="prix" name="prix" type="number">
-                                <span class="helper-text" data-error="wrong" data-success="right">Montant en euros</span>
-                              </div>
-                            </div>
-                          </div>
+        <!--<div id="slider-price" class="input-field col s8" min="0" max="1000"></div> -->
+        <p class="range-field col s8">
+          <input type="range" name="range" min="0" max="100" onchange="isFree(this.value)" />
+        </p>
 
-                          <div class="row col s12 valign-wrapper">
-                                <p class="range-field col s4">
-                                  <label>Type de soirée</label>
-                                </p>
+        <div class="input-field col s4">
+          <div>
+            <input id="prix" name="prix" type="text">
+            <span class="helper-text" data-error="wrong" data-success="right">Montant en euros</span>
+          </div>
+        </div>
+      </div>
+      <div class="row col s12 valign-wrapper">
+        <p class="range-field col s4">
+          <label>Type de soirée</label>
+        </p>
 
-                                <div class="input-field col s8">
-                                        <div class="switch">
-                                                <label>
-                                                  Publique
-                                                  <input id="statut" name="statut" type="checkbox">
-                                                  <span class="lever"></span>
-                                                  Privée
-                                                </label>
-                                            </div>
-                                </div>
-                              </div>
+        <div class="input-field col s8">
+          <div class="switch">
+            <label>
+              Publique
+              <input id="statut" name="statut" type="checkbox">
+              <span class="lever"></span>
+              Privée
+            </label>
+          </div>
+        </div>
+      </div>
 
-                          <a class="waves-effect btn" id="creerSoireeinDB">Creer une soiree</a>
-                        </form>
-                </div>
-        <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAkwGPEVldEoytWLqPEviQOQPeE3-zbtg&callback=initMap">
-        </script>
-        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <script type="text/javascript" src="js/jquery.js"></script>
-         <script type="text/javascript" src="js/materialize.min.js"></script>
-       <script type="text/javascript" src="js/app.js"></script>
-       <script type="text/javascript" src="js/form.soiree.js"></script>
-        </body>
+      <a class="waves-effect btn" id="creerSoireeinDB">Creer une soiree</a>
+    </form>
+  </div>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAkwGPEVldEoytWLqPEviQOQPeE3-zbtg&callback=initMap">
+
+  </script>
+  <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+  <script type="text/javascript" src="js/form.soiree.js"></script>
+</body>
+
 </html>

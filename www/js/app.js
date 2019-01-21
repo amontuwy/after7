@@ -60,6 +60,7 @@ function initDatabase() {
   $("#map").hide();
   $("#search").hide();
   $("#creersoiree").hide();
+  $("#comeback").hide();
   $("#connected").hide();
 }
 
@@ -137,6 +138,7 @@ function addRecordSoiree() {
       $("#map").show();
       $("#search").show();
       $("#creersoiree").hide();
+      $('#comeback').hide()
     });
   }
 }
@@ -146,6 +148,7 @@ function gotoCreateSoiree() {
   $("#search").hide();
   initialization();
   $("#creersoiree").show();
+  $("#comeback").show()
 }
 
 function verifyuserinbase(name,password)
@@ -282,6 +285,47 @@ function initMap() {
     // infoWindow.open(map);
   }
 }
+
+function validTitre(value){
+  if (value == ""){
+    document.getElementById('titreLabel').innerHTML = "Titre de la soirée <b style='color:red;'>*</b>";
+  } else {
+    document.getElementById('titreLabel').innerHTML = "Titre de la soirée";
+  }
+ }
+ 
+ function validLieu(value){
+  if (value == ""){
+    document.getElementById('lieuLabel').innerHTML = "Lieu <b style='color:red;'>*</b>";
+  } else {
+    document.getElementById('lieuLabel').innerHTML = "Lieu";
+  }
+ }
+ 
+ function validDate(value){
+  if (value == "dd/mm/yyyy"){
+    document.getElementById('dateLabel').innerHTML = "Date <b style='color:red;'>*</b>";
+  } else {
+    document.getElementById('dateLabel').innerHTML = "Date";
+  }
+ }
+ 
+ function isFree(value){
+  if (value == 0){
+    document.getElementById("prix").value = "Gratuit";
+    document.getElementById("prix").style = "color:Green;font-weight: bold;";
+  } else {
+    document.getElementById("prix").style = "color:initial;font-weight: normal;";
+  }
+ }
+ 
+ function validTheme(value){
+  if (value == "Choisir votre thème"){
+    document.getElementById('themeLabel').innerHTML = "Thème <b style='color:red;'>*</b>";
+  } else {
+    document.getElementById('themeLabel').innerHTML = "Thème";
+  }
+ }
 
 function geocoding(adresse){
   nativegeocoder.forwardGeocode(success, failure, adresse, { useLocale: true, maxResults: 1 });

@@ -19,13 +19,13 @@
     "cordova-plugin-geolocation": {
       "PACKAGE_NAME": "com.team.jade"
     },
+    "cordova-plugin-nativegeocoder": {
+      "PACKAGE_NAME": "com.team.jade"
+    },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.team.jade"
     },
     "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "com.team.jade"
-    },
-    "cordova-plugin-nativegeocoder": {
       "PACKAGE_NAME": "com.team.jade"
     }
   },
