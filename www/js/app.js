@@ -241,44 +241,45 @@ function initMap() {
                 console.log('latitude : '+results.rows.item(i)['geocodlat']+' longitude : '+results.rows.item(i)['geocodlng']);
                 var possoiree = new google.maps.LatLng(results.rows.item(i)['geocodlat'], results.rows.item(i)['geocodlng']);
                 var marker = new google.maps.Marker({ position: possoiree, map: map }); 
-                var infoBulle = new google.maps.InfoWindow({
-                       content: "Titre : "+results.rows.item(i)['titre']+" Date:"+results.rows.item(i)['date']
-                    });
-                google.maps.event.addListener(marker, 'click', function () {
-                            infoBulle.open(map, marker);
-                         });
+                var infoBulle = new google.maps.InfoWindow();
+                var content = "<p> Titre : "+results.rows.item(i)['titre']+"<br/>"+" Date : "+results.rows.item(i)['date']+"</p>"
+
+                google.maps.event.addListener(marker,'click', (function(marker,content,infoBulle){ 
+                      return function() {
+                          infoBulle.setContent(content);
+                          infoBulle.open(map,marker);
+                      };
+                  })(marker,content,infoBulle));      
               }
             },errorCB,successCB
       );});
  
-  infoWindow = new google.maps.InfoWindow;
-
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
-      var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
-      infoWindow.setPosition(pos);
-      infoWindow.setContent('Location found.');
-      infoWindow.open(map);
+       var pos = {
+         lat: position.coords.latitude,
+         lng: position.coords.longitude
+       };
+      // infoWindow.setPosition(pos);
+      // infoWindow.setContent('Location found.');
+      // infoWindow.open(map);
       map.setCenter(pos);
     }, function () {
-      handleLocationError(true, infoWindow, map.getCenter());
+      handleLocationError(true, map.getCenter());
     });
   }
   else {
     // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter());
+    handleLocationError(false, map.getCenter());
   }
 
 
-  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(browserHasGeolocation ?
-      'Error: The Geolocation service failed.' :
-      'Error: Your browser doesn\'t support geolocation.');
-    infoWindow.open(map);
+  function handleLocationError(browserHasGeolocation, pos) {
+    //infoWindow.setPosition(pos);
+    // infoWindow.setContent(browserHasGeolocation ?
+    //   'Error: The Geolocation service failed.' :
+    //   'Error: Your browser doesn\'t support geolocation.');
+    // infoWindow.open(map);
   }
 }
 

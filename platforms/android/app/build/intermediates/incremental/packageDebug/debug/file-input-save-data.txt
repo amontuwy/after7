@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Jan 21 13:48:11 CET 2019
+#Mon Jan 21 15:30:51 CET 2019
 5.base=/home/amontuwy/After7/platforms/android/app/build/intermediates/assets/debug
 22.path=www/js/form.soiree.js
 32.set=ASSET
