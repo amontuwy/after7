@@ -21,7 +21,7 @@
       </nav>
 
       <div class="card-panel center-align">
-        <form>
+        <form id="rechercheSoiree">
 
           <div class="row valign-wrapper">
             <div class="input-field col s10">
@@ -34,7 +34,7 @@
           <div class="row valign-wrapper">
             <div class="range-field col s6">
               <label for="volume">Distance (km)</label>
-              <input type="range" id="range" min="0" max="100" />
+              <input type="range" id="range" min="1" max="100" />
             </div>
             <div class="input-field col s6">
               <input name="date" type="date" class="datepicker" onclick="calendar()">
@@ -45,6 +45,7 @@
           <div class="row valign-wrapper">
             <div class="input-field col s4">
               <select>
+                <option value="all">Tous</option>
                 <option value="public">Publique</option>
                 <option value="private">Privée</option>
               </select>
