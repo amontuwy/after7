@@ -44,3 +44,4 @@ tmp/**/*
 *.iml
 npm-debug.log
 node_modules/
+platforms/
