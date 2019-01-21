@@ -17,7 +17,7 @@
                 height: 250pt;  /* The height is 100 % */
                 width: 100%;  /* The width is the width of the web page */
                 }
-        </style>    
+        </style>
     </head>
     <body>
         <nav>
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </nav>
-        
+
                 <!-- login module -->
         <div id="login" class="card-panel center-align">
                 <form>
@@ -38,25 +38,25 @@
                         <input id="nom" type="text">
                         <label for="nom">Nom d'utilisateur</label>
                     </div>
-        
+
                     <div class="input-field">
                         <input id="mdp" type="password">
                         <label for="mdp">Mot de passe</label>
                     </div>
-        
+
                     <a class="waves-effect btn" id="creercompte">Creer un compte</a>
                 </form>
                 <br/>
                 <a class="waves-effect btn" id="seconnecter">Se connecter</a>
                 </div>
-        
+
         <!--The div element for the map -->
         <div id="map"></div>
 
         <!--The div of party search -->
         <div id="search" class="card-panel center-align">
                 <form>
-        
+
                   <div class="row valign-wrapper">
                     <div class="input-field col s10">
                       <input id="lieur" type="text">
@@ -64,7 +64,7 @@
                     </div>
                     <a class="btn waves-effect waves-light col s2"><i class="material-icons">location_searching</i></a>
                   </div>
-        
+
                   <div class="row valign-wrapper">
                     <div class="range-field col s6">
                       <label for="distancer">Distance (km)</label>
@@ -75,7 +75,7 @@
                       <label for="dater">Date</label>
                     </div>
                   </div>
-        
+
                   <div class="row valign-wrapper">
                     <div class="input-field col s4">
                       <select id="statutr">
@@ -89,7 +89,7 @@
                       <label for="theme">Thème</label>
                     </div>
                   </div>
-        
+
                   <a class="waves-effect btn" id="searchsoiree">Rechercher</a>
                 </form>
               </div>
@@ -102,53 +102,54 @@
                             <span>Import</span>
                             <input id="file" type = "file" />
                             </div>
-              
+
                             <div class = "file-path-wrapper">
                               <input class = "file-path validate" type = "text"  placeholder = "Importez votre banière" />
                             </div>
-              
+
                         </div>
-              
+
                           <div class="input-field">
                             <i class="material-icons md-16 prefix">title_outline</i>
                             <input name="titre" id="titre" type="text">
                             <label for="titre">Titre de la soirée</label>
                           </div>
-              
+
                           <div class="input-field">
                             <i class="material-icons md-16 prefix">event_outline</i>
                             <input id="date" name="date" type="date" class="datepicker" onclick="calendar()" >
                             <label for="date">Date</label>
                           </div>
-              
+
                           <div class="input-field">
                             <i class="material-icons md-16 prefix">place_outline</i>
                             <input id="lieu" name="lieu" type="text">
                             <label for="lieu">Lieu</label>
                           </div>
-              
+
                           <div class="input-field">
                             <input id="descr" name="descr" type="text">
                             <label for="descr">Description</label>
                           </div>
-              
+
                           <div class="input-field">
                             <select id="theme" name="theme">
                               <option value="" disabled selected>Choisir votre thème</option>
                               <option value="1">Disco</option>
                               <option value="2">Déguisement</option>
                               <option value="3">Country</option>
+                              <option value="4">Custom</option>
                             </select>
                             <label>Thème</label>
                           </div>
-              
+
                           <div class="row col s12 valign-wrapper">
-              
+
                             <!--<div id="slider-price" class="input-field col s8" min="0" max="1000"></div> -->
                             <p class="range-field col s8">
                               <input type="range" name="range" min="0" max="100"/>
                             </p>
-              
+
                             <div class="input-field col s4">
                               <div>
                                 <input id="prix" name="prix" type="number">
@@ -161,7 +162,7 @@
                                 <p class="range-field col s4">
                                   <label>Type de soirée</label>
                                 </p>
-                  
+
                                 <div class="input-field col s8">
                                         <div class="switch">
                                                 <label>
@@ -173,7 +174,7 @@
                                             </div>
                                 </div>
                               </div>
-                          
+
                           <a class="waves-effect btn" id="creerSoireeinDB">Creer une soiree</a>
                         </form>
                 </div>
