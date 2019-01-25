@@ -57,6 +57,10 @@ function initDatabase() {
   database.transaction(function (transaction) {
     transaction.executeSql('CREATE TABLE events (titre, date, lieu, geocodlat, geocodlng, descr, theme, prix, statut)');
   });
+
+  database.transaction(function(transaction){
+    transaction.executeSql('CREATE TABLE userinscription (name, password, titre, date, lieu, geocodlat, geocodlng, descr, theme, prix, statut)');
+  });
   $("#map").hide();
   $("#search").hide();
   $("#creersoiree").hide();
@@ -224,6 +228,32 @@ function verify() {
   }
 }
 
+
+// function populateresults(array){
+//   makeUL(array);
+//   document.getElementById('results').appendChild(makeUL(array));
+// }
+
+// function makeUL(array) {
+//   // Create the list element:
+//   var list = document.createElement('ul');
+
+//   for (var i = 0; i < array.length; i++) {
+//       // Create the list item:
+//       var item = document.createElement('li');
+
+//       // Set its contents:
+//       item.appendChild(document.createTextNode(array[i]));
+
+//       // Add it to the list:
+//       list.appendChild(item);
+//   }
+
+//   // Finally, return the constructed list:
+//   return list;
+// }
+
+
 function initMap() {
   // The location of Rennes
   var Rennes = { lat: 48.117180, lng: -1.677770 };
@@ -240,6 +270,7 @@ function initMap() {
           [],
           function(transaction,results)
             { var taille = results.rows.length;
+              //populateresults(results);
               for (let i =0;i<taille;i++){
                 console.log('latitude : '+results.rows.item(i)['geocodlat']+' longitude : '+results.rows.item(i)['geocodlng']);
                 var possoiree = new google.maps.LatLng(results.rows.item(i)['geocodlat'], results.rows.item(i)['geocodlng']);
@@ -263,9 +294,7 @@ function initMap() {
          lat: position.coords.latitude,
          lng: position.coords.longitude
        };
-      // infoWindow.setPosition(pos);
-      // infoWindow.setContent('Location found.');
-      // infoWindow.open(map);
+
       map.setCenter(pos);
     }, function () {
       handleLocationError(true, map.getCenter());

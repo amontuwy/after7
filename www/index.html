@@ -60,46 +60,53 @@
   <!--The div element for the map -->
   <div id="map"></div>
 
-  <!--The div of party search -->
-  <div id="search" class="card-panel center-align">
-    <form>
+ <!--The div of party search -->
+ <div id="search" class="card-panel center-align">
+  <form>
 
-      <div class="row valign-wrapper">
-        <div class="input-field col s10">
-          <input id="lieur" type="text">
-          <label for="lieur">Lieu</label>
-        </div>
-        <a class="btn waves-effect waves-light col s2"><i class="material-icons">location_searching</i></a>
+    <div class="row valign-wrapper">
+      <div class="input-field col s10">
+        <input id="lieuSearch" type="text">
+        <label for="lieuSearch">Lieu</label>
       </div>
+      <a class="btn waves-effect waves-light col s2"><i class="material-icons">location_searching</i></a>
+    </div>
 
-      <div class="row valign-wrapper">
-        <div class="range-field col s6">
-          <label for="distancer">Distance (km)</label>
-          <input type="range" id="distancer" min="0" max="100" />
-        </div>
-        <div class="input-field col s6">
-          <input name="dater" type="date" class="datepicker" onclick="calendar()">
-          <label for="dater">Date</label>
-        </div>
+    <div class="row valign-wrapper">
+      <div class="range-field col s6">
+        <label for="distanceSearch">Distance (km)</label>
+        <input type="range" id="distanceSearch" min="0" max="100" />
       </div>
-
-      <div class="row valign-wrapper">
-        <div class="input-field col s4">
-          <select id="statutr">
-            <option value="public">Publique</option>
-            <option value="private">Privée</option>
-          </select>
-          <label>Type de soirée</label>
-        </div>
-        <div class="input-field col s8">
-          <input id="themer" type="text">
-          <label for="theme">Thème</label>
-        </div>
+      <div class="input-field col s6">
+        <input id="dateSearch" name="date" type="date" class="datepicker" onclick="calendar()" onchange="validDate(this.value)"
+          required>
+        <label id="dateLabel" for="dateSearch">Date</label>
       </div>
+    </div>
 
-      <a class="waves-effect btn" id="searchsoiree">Rechercher</a>
-    </form>
-  </div>
+    <div class="row valign-wrapper">
+      <div class="input-field col s5">
+        <select id="statutSearch">
+          <option value="public">Publique</option>
+          <option value="private">Privée</option>
+        </select>
+        <label>Type de soirée</label>
+      </div>
+      <div class="input-field col s7">
+        <select id="themeSearch" name="theme" onchange="validTheme(this.value)">
+          <option value="0" selected>Tous</option>
+          <option value="1">Disco</option>
+          <option value="2">Déguisement</option>
+          <option value="3">Country</option>
+          <option value="4">Custom</option>
+        </select>
+        <label id="themeLabel">Thème</label>
+      </div>
+    </div>
+
+    <a class="waves-effect btn" id="searchsoiree">Rechercher</a>
+  </form>
+</div>
 
   <!--creer soiree-->
   <div id="creersoiree" class="card-panel center-align">
