@@ -90,8 +90,8 @@ function addRecordSoiree() {
   var prixsoiree = $('#prix').val();
   var statutsoiree = $('#statut').val();
 
-  if( titresoiree == null || titresoiree == "" || lieusoiree == null || lieusoiree == "" || descrsoiree == null || descrsoiree == "" ||
-      themesoiree == null || themesoiree == "" || prixsoiree == null || prixsoiree == "" || statutsoiree == null || statutsoiree == ""){
+  if( titresoiree == null || titresoiree == "" || lieusoiree == null || lieusoiree == "" ||
+  themesoiree == null || themesoiree == "" || prixsoiree == null || prixsoiree == "" || statutsoiree == null || statutsoiree == ""){
         alert("Veuillez remplir tous les champs en rouge");
         if(titresoiree == null || titresoiree == ""){
           $('#titre').style.borderColor = "red";
@@ -327,6 +327,13 @@ function validTitre(value){
   }
  }
 
+function retour() {
+  $("#map").show();
+  $("#search").show();
+  $("#creersoiree").hide();
+  $("#comeback").hide()
+ }
+
 function geocoding(adresse){
   nativegeocoder.forwardGeocode(success, failure, adresse, { useLocale: true, maxResults: 1 });
  
@@ -345,6 +352,7 @@ document.addEventListener('deviceready', function () {
   $('#seconnecter').click(verify);
   $('#addsoiree').click(gotoCreateSoiree);
   $('#creerSoireeinDB').click(addRecordSoiree);
+  $('#back').click(retour)
   initDatabase();
 });
 
