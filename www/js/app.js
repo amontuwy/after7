@@ -229,31 +229,6 @@ function verify() {
 }
 
 
-// function populateresults(array){
-//   makeUL(array);
-//   document.getElementById('results').appendChild(makeUL(array));
-// }
-
-// function makeUL(array) {
-//   // Create the list element:
-//   var list = document.createElement('ul');
-
-//   for (var i = 0; i < array.length; i++) {
-//       // Create the list item:
-//       var item = document.createElement('li');
-
-//       // Set its contents:
-//       item.appendChild(document.createTextNode(array[i]));
-
-//       // Add it to the list:
-//       list.appendChild(item);
-//   }
-
-//   // Finally, return the constructed list:
-//   return list;
-// }
-
-
 function initMap() {
   // The location of Rennes
   var Rennes = { lat: 48.117180, lng: -1.677770 };
@@ -276,7 +251,7 @@ function initMap() {
                 var possoiree = new google.maps.LatLng(results.rows.item(i)['geocodlat'], results.rows.item(i)['geocodlng']);
                 var marker = new google.maps.Marker({ position: possoiree, map: map }); 
                 var infoBulle = new google.maps.InfoWindow();
-                var content = "<p> Titre : "+results.rows.item(i)['titre']+"<br/>"+" Date : "+results.rows.item(i)['date']+"</p>"
+                var content = "<p> Titre : "+results.rows.item(i)['titre']+"<br/>"+" Date : "+results.rows.item(i)['date']+"<br/><button onclick='displaySoiree(results.rows.item(i)['titre'], results.rows.item(i)['date'], results.rows.item(i)['lieu'], results.rows.item(i)['descr'], results.rows.item(i)['prix'], results.rows.item(i)['status'])'>En savoir plus</button></p>"
 
                 google.maps.event.addListener(marker,'click', (function(marker,content,infoBulle){ 
                       return function() {
@@ -307,11 +282,7 @@ function initMap() {
 
 
   function handleLocationError(browserHasGeolocation, pos) {
-    //infoWindow.setPosition(pos);
-    // infoWindow.setContent(browserHasGeolocation ?
-    //   'Error: The Geolocation service failed.' :
-    //   'Error: Your browser doesn\'t support geolocation.');
-    // infoWindow.open(map);
+
   }
 }
 
@@ -322,6 +293,10 @@ function validTitre(value){
     document.getElementById('titreLabel').innerHTML = "Titre de la soirée";
   }
  }
+
+function displaySoiree(titre, date, lieu, descr, prix, status){
+   
+}
  
  function validLieu(value){
   if (value == ""){
