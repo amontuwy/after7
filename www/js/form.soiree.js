@@ -1,6 +1,8 @@
+// fichier de gestion du formulaire pour la création d'une soirée
 var isBrowser = false;
 var currentDateFormated = new Date().toLocaleDateString("en-GB"); // DD-MM-YYYY
 
+// fait la mise en relation entre l'input prix et le slider prix
 function initialization() {
   $(document).ready(function(){
     var currentDateFormated = new Date().toISOString().split("T")[0] // MM-DD-YYYY
@@ -23,7 +25,7 @@ function initialization() {
   document.addEventListener("deviceready", onDeviceReady, false);
 }
 
-
+// gere le format de date du datepicker
 function calendar(){
   if(isBrowser){
     var options = {
@@ -33,7 +35,6 @@ function calendar(){
     };
 
     datePicker.show(options, function(date){
-     //alert("date result " + date);     // not working
      $('input[name=date]').val(date.toLocaleDateString("en-GB"));
     });
   }

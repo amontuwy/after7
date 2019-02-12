@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="utf-8" />
-  <!-- <meta http-equiv="Content-Security-Policy" content="default-src data: gap: https://ssl.gstatic.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; connect-src *"> -->
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -12,24 +11,27 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   <title>After 7</title>
-  <style>
-    /* Set the size of the div element that contains the map */
-            #map {
-                height: 250pt;  /* The height is 100 % */
-                width: 100%;  /* The width is the width of the web page */
-                }
-        </style>
+    <style>
+        #map {
+          height: 250pt;  
+          width: 100%;
+        }              
+    </style>
 </head>
 
 <body>
+  <!-- bandeau de navigation rose en haut de la page-->
   <nav>
     <div class="nav-wrapper pink">
+      <!-- bouton de retour à la page précédente, à afficher sur la page de détails d'une soirée et de création d'une soirée-->
       <div id="comeback">
         <ul id="nav-mobile" class="left">
           <li><a class="waves-effect btn-small" id="back"><i class="material-icons">keyboard_backspace</i></a></li>
         </ul>
       </div>
+      <!-- titre de l'application-->
       <a href="#" class="brand-logo center">AFTER 7</a>
+      <!-- bouton de création d'une soirée à n'afficher que quand l'utilisateur est connecté-->
       <div id="connected">
         <ul id="nav-mobile" class="right">
           <li><a class="waves-effect btn-small" id="addsoiree">+</a></li>
@@ -38,7 +40,7 @@
     </div>
   </nav>
 
-  <!-- login module -->
+  <!-- module de création de compte / connexion d'un utilisateur -->
   <div id="login" class="card-panel center-align">
     <form>
       <div class="input-field">
@@ -57,10 +59,10 @@
     <a class="waves-effect btn" id="seconnecter">Se connecter</a>
   </div>
 
-  <!--The div element for the map -->
+  <!-- module carte à afficher quand le user est connecté, avec les informations adéquates (toutes les soirées ou soirées recherchées)  -->
   <div id="map"></div>
 
-  <!--Div affichage d'une soiree-->
+  <!-- module d'affichage des détails d'une soirée, quand soirée cliquée sur carte (entraine la disparition du module carte) -->
   <div id="displaysoiree" class="card-panel center-align">
     <h1 id="soireeTitre" style="text-align:center;font-size:300%;">Soirée Lambda</h1>
     <img src="party.jpg" alt="Party" style="width:320px;height:200px;">
@@ -76,7 +78,7 @@
     <a class="waves-effect btn pink" id="inscription">Je m'inscris !</a>
   </div>
 
- <!--The div of party search -->
+ <!--module de recherche d'une soirée. Toujours affiché sous la carte. -->
  <div id="search" class="card-panel center-align">
   <form>
 
@@ -109,6 +111,7 @@
         </select>
         <label>Type de soirée</label>
       </div>
+
       <div class="input-field col s7">
         <select id="themeSearch" name="theme" onchange="validTheme(this.value)">
           <option value="0" selected>Tous</option>
@@ -125,8 +128,8 @@
   </form>
 </div>
 
-  <!--creer soiree-->
-  <div id="creersoiree" class="card-panel center-align">
+<!-- module de création d'une soirée, à afficher quand le bouton "+" est cliqué dans le bandeau -->
+<div id="creersoiree" class="card-panel center-align">
     <form class="col s12">
       <div class="file-field input-field">
         <div class="btn">
@@ -143,6 +146,7 @@
       <div class="input-field">
         <i class="material-icons md-16 prefix">title_outline</i>
         <input name="titre" id="titre" type="text" onchange="validTitre(this.value)" required>
+        <!-- A la demande du client, une astérisque est ajoutée pour les champs obligatoires-->
         <label id="titreLabel" for="titre">Titre de la soirée <b style="color:red;">*</b></label>
       </div>
 
@@ -176,8 +180,6 @@
       </div>
 
       <div class="row col s12 valign-wrapper">
-
-        <!--<div id="slider-price" class="input-field col s8" min="0" max="1000"></div> -->
         <p class="range-field col s8">
           <input type="range" name="range" min="0" max="100" onchange="isFree(this.value)" />
         </p>
@@ -189,6 +191,7 @@
           </div>
         </div>
       </div>
+
       <div class="row col s12 valign-wrapper">
         <p class="range-field col s4">
           <label>Type de soirée</label>
@@ -210,6 +213,7 @@
     </form>
   </div>
 
+  <!-- Accès à l'API de Google Maps pour l'affichage de la carte-->
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAkwGPEVldEoytWLqPEviQOQPeE3-zbtg&callback=initMap">
 
   </script>
